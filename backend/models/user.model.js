@@ -34,8 +34,11 @@ const userSchema=new mongoose.Schema({
       ,postalCode:{
         type:String,
         required:true
+      },
+       addressType: {
+        type: String
       }
-    }
+    },
   ],
   role:{
     type:String,
