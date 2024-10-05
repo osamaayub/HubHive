@@ -41,6 +41,24 @@ const productSchema=new mongoose.Schema({
       required:true
     }
   }]
+  ,review:[
+    {
+      user:{
+        type:Object
+      },
+      rating:{
+        type:Number,
+        min:1,
+        max:5
+      },
+      comment:{
+        type:String,
+      },
+      productId:{
+        type:String,
+      }
+    }
+  ]
 },{timestamps:true});
 
 
