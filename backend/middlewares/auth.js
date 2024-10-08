@@ -23,7 +23,7 @@ const isAuthenticated=async(req,res,next)=>{
 const isSeller=async(req,res,next)=>{
    const {token}=req.cookies;
    if(!token){
-    return res.status(401).json({message:"Authorized Seller please login to continue"});
+    return res.status(401).json({message:"UnAuthorized Seller please login to continue"});
    }
    const decodedToken=verifyToken(token);
    req.shop=await Shop.findById(decodedToken.id);
