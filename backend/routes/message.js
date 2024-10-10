@@ -1,4 +1,5 @@
 import express from "express";
+import { createNewMessage, getAllMessage } from "../controllers/messageController";
 
 export const messageRouter = express.Router();
 
