@@ -37,7 +37,7 @@ export const createWithdrawRequest = async (req, res) => {
 
 export const getAllPayments = async (req, res) => {
   try {
-    const amount = await Withdraw.find().sort({ createAt: -1 });
+    const amount = await Withdraw.find().sort({ createdAt: -1 });
     res.status(200).json(amount);
   } catch (error) {
     res.status(500).json({ message: error.message });
