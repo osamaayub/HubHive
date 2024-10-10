@@ -1,6 +1,6 @@
 import express from "express";
-import { isAdmin, isSeller, isAuthenticated } from "../middlewares/auth";
-
+import { isAdmin, isAuthenticated } from "../middlewares/auth";
+import { getAllEvents, getEvents, getAdminEvents, createNewEvent, deleteEvent } from "../controllers/eventController";
 
 export const eventRouter = express.Router();
 
