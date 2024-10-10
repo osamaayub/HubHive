@@ -1,71 +1,72 @@
 import mongoose from "mongoose";
 
 
-const shopSchema=new mongoose.Schema({
-  name:{
-    type:String,
-    required:true
+const shopSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
   },
-  email:{
-    type:String,
-    required:true
+  email: {
+    type: String,
+    required: true
   },
-  password:{
-    type:String,
-    required:true,
-    min:1,
-    max:6,
-    select:false
+  password: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 6,
+    select: false
   },
-  description:{
-    type:String
+  description: {
+    type: String
   },
-  address:{
-    type:String,
-    required:true
+  address: {
+    type: String,
+    required: true
   },
-  phoneNumber:{
-    type:Number,
-    required:true
+  phoneNumber: {
+    type: Number,
+    required: true
   },
-  role:{
-    type:String,
-    default:"Seller"
+  role: {
+    type: String,
+    default: "Seller"
   },
-  avatar:{
-    public_id:{
-      type:String,
-      required:true
+  avatar: {
+    public_id: {
+      type: String,
+      required: true
     },
-    url:{
-      type:String
+    url: {
+      type: String,
+      required: true
     }
   },
-  zipCode:{
-    type:Number,
-    required:true
+  zipCode: {
+    type: Number,
+    required: true
   },
-  withDrawalMethod:{
-    type:Object
+  withDrawalMethod: {
+    type: Object
   },
-  availableBalance:{
-    type:Number,
-    default:0
+  availableBalance: {
+    type: Number,
+    default: 0
   },
-  transactions:[
+  transactions: [
     {
-      amount:{
-        type:Number,
-        required:true
+      amount: {
+        type: Number,
+        required: true
       },
-      status:{
-        type:String,
-        default:"Processing"
+      status: {
+        type: String,
+        default: "Processing"
       }
     }
   ]
-},{timestamps:true});
+}, { timestamps: true });
 
 
 
-export const Shop=mongoose.model("Shop",shopSchema);
+export const Shop = mongoose.model("Shop", shopSchema);
