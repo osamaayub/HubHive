@@ -1,5 +1,6 @@
 import express from "express";
 import { isSeller, isAdmin, isAuthenticated } from "../middlewares/auth";
+import { createWithdrawRequest, getAllPayments, updateWithdrawRequest } from "../controllers/withdrawController";
 
 const WithdrawRouter = express.Router();
 
