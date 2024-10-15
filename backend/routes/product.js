@@ -1,5 +1,6 @@
 import express from "express";
 import { isAdmin, isSeller, isAuthenticated } from "../middlewares/auth";
+import { createProduct, getAllProducts, getProducts, updateReview, deleteProduct, manageProducts } from "../controllers/productController";
 
 
 export const productRouter = express.Router();
@@ -16,7 +17,7 @@ productRouter.get("/get-all-shop-items/:id", getAllProducts);
 
 //delete a product from the shop
 
-productRouter.delete("/delete-shop-item/:id", isSeller, deleteShopItem);
+productRouter.delete("/delete-shop-item/:id", isSeller, deleteProduct);
 
 //get all the shop Items
 
