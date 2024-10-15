@@ -82,7 +82,7 @@ export const deleteEvent = async (req, res) => {
     const { id } = req.params;
     const event = await Event.findById(id);
     if (!product) {
-      return res.status(400).json({ message: "product not found" });
+      return res.status(404).json({ message: "product not found" });
     }
     for (let i = 0; i < product.images.length; i++) {
       const images = await cloudinary.uploader.destroy(
