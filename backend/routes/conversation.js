@@ -1,7 +1,7 @@
 import express from "express";
 import { isSeller, isAuthenticated } from "../middlewares/auth";
 
-
+import { createNewConversation, getSellerConversations, getUserConversation, updateConversation } from "../controllers/conversationController";
 
 export const conversationRouter = express.Router();
 
