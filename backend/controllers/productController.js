@@ -84,40 +84,58 @@ export const manageProducts = async (req, res) => {
 export const updateReview = async (req, res) => {
   try {
     const { user, rating, comment, productId, orderId } = req.body;
-    const product = await Product.findById(productId);
-    const review = {
-      user, comment, productId, rating
-    }
-    const isReviewd = product.review.find((rev) => rev.user._id === req.user._id);
-    if (isReviewd) {
-      product.review.forEach((rev) => {
-        if (rev.user_id === req.user._id) {
-          rev.rating = rating,
-            rev.comment = comment,
-            rev.user = user;
-        }
-        else {
-          product.review.push(review);
-        }
-        let avg = 0;
-        product.review.forEach((rev) => {
-          avg += rev.rating;
-        })
-        product.ratings = avg / product.review.length;
-      });
-      await product.save();
-      const order = await Order.findByIdAndUpdate(orderId,
-        {
-          $set: { "cart.$[elem].isReviewed": true },
-          arrayFilters: [{ "elem_id": [productId] }],
-          new: true
-        })
-    };
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-}
 
+    const product = await Product.findById(productId);
+    if (!product) {
+      return res.status(404).json({ message: "Product not found" });
+    }
+
+    const review = {
+      user,
+      comment,
+      productId,
+      rating
+    };
+
+    const existingReviewIndex = product.review.findIndex(
+      (rev) => rev.user._id.toString() === req.user._id.toString()
+    );
+
+    if (existingReviewIndex > -1) {
+      // Update existing review
+      product.review[existingReviewIndex] = {
+        ...product.review[existingReviewIndex],
+        ...review
+      };
+    } else {
+      // Add new review
+      product.review.push(review);
+    }
+
+    // Recalculate average rating
+    const totalRating = product.review.reduce((sum, rev) => sum + rev.rating, 0);
+    product.ratings = totalRating / product.review.length;
+
+    await product.save();
+
+    // Update order
+    await Order.findByIdAndUpdate(
+      orderId,
+      {
+        $set: { "cart.$[elem].isReviewed": true },
+      },
+      {
+        arrayFilters: [{ "elem._id": productId }],
+        new: true,
+      }
+    );
+
+    res.status(200).json({ message: "Review updated successfully" });
+  } catch (error) {
+    console.error("Error updating review:", error);
+    res.status(500).json({ message: "An error occurred while updating the review" });
+  }
+};
 //delete review
 export const deleteProduct = async (req, res) => {
   try {
