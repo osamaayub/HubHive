@@ -68,9 +68,8 @@ export const updateConversation = async (req, res) => {
     const { lastMessage, lastMessageId } = req.body;
     const update_conversation = await Conversation.findByIdAndUpdate(id,
       lastMessage, lastMessageId);
-    res.status(201).json(update_conversation, {
-      sucess: true
-    })
+    if (!update_conversation) return res.status(404).json({ message: "conservation not found" });
+    res.status(200).json(update_conversation);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
