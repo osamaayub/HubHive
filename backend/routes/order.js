@@ -1,12 +1,18 @@
 import express from "express";
 import { isAdmin, isSeller, isAuthenticated } from "../middlewares/auth";
-
+import {
+  getOrders,
+  getAllOrders,
+  updateOrderStatus,
+  updateRefundUser,
+  updateRefundSeller
+} from "../controllers/orderController";
 export const orderRouter = express.Router();
 
 
 //get  User orders
 
-orderRouter.get("/orders/:userId", getOrders);
+orderRouter.get("/users/orders/:userId", getOrders);
 
 
 
@@ -14,20 +20,13 @@ orderRouter.get("/orders/:userId", getOrders);
 
 orderRouter.post("/new-order", createNewOrder);
 
-//delete a order
-
-orderRouter.delete("/delete-order/:id", deleteOrder);
-
-//update a order
-
-orderRouter.put("/update-order/:id", updateOrder);
 
 //admin get all orders
-orderRouter.get("/admin-all-orders", isAuthenticated, isAdmin("Admin"), getAllOrders);
+orderRouter.get("/admin/orders", isAuthenticated, isAdmin("Admin"), getAllOrders);
 
-//refund for the User
-
-orderRouter.put("order-refund/:id", updateRefund);
-
+//give refund for the User
+orderRouter.put("/user/order-refund/:id", updateRefundUser);
+//give refund for the seller
+orderRouter.put("/seller/order-refund/:id", updateRefundSeller);
 //update order status for seller
-orderRouter.put("/order-status/:id", isSeller, updateOrderStatus);
+orderRouter.put("/seller/order-status/:id", isSeller, updateOrderStatus);
