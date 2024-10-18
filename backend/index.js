@@ -11,10 +11,11 @@ import {
   orderRouter,
   productRouter,
   userRouter,
-  withdrawRouter
+  withdrawRouter,
+  shopRouter
 } from "./routes";
 import cookieParser from "cookie-parser";
-import { shopRouter } from "./routes/shop.js";
+
 
 
 
