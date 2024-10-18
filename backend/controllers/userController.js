@@ -1,13 +1,13 @@
-import { User } from "../models/user.model";
-import { v2 as cloudinary } from "cloudinary";
-import { sendEmail } from "../utils/sendEmail";
-import { createToken, comparePassword, verifyToken } from "../utils";
+const { User } = requuire("../models/user.model");
+const cloudinary = require("cloudinary").v2;
+const sendEmail = require("../utils/sendEmail");
+const { createToken, comparePassword, verifyToken } = require("../utils");
 
 
 
 
 //create a new User
-export const createUser = async (req, res) => {
+const createUser = async (req, res) => {
   try {
     const { username, email, password, avatar } = req.body;
     const userEmail = await User.find({ email });
@@ -43,7 +43,7 @@ export const createUser = async (req, res) => {
 
 //login User 
 
-export const loginUser = async (req, res) => {
+const loginUser = async (req, res) => {
   try {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -61,7 +61,7 @@ export const loginUser = async (req, res) => {
 }
 //logout 
 
-export const logoutUser = async (req, res) => {
+const logoutUser = async (req, res) => {
   try {
     res.cookie("token", null, {
       httpOnly: true,
@@ -79,7 +79,7 @@ export const logoutUser = async (req, res) => {
 }
 //get single user data through id
 
-export const getSingleUser = async (req, res) => {
+const getSingleUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -94,7 +94,7 @@ export const getSingleUser = async (req, res) => {
 }
 //get all the user only for Admin
 
-export const getAllUsers = async (req, res) => {
+const getAllUsers = async (req, res) => {
   try {
     const user = await User.find().sort({ createdAt: -1 });
     res.status(200).json({
@@ -107,7 +107,7 @@ export const getAllUsers = async (req, res) => {
 }
 //load the user 
 
-export const getUser = async (req, res) => {
+const getUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -125,7 +125,7 @@ export const getUser = async (req, res) => {
 }
 //update User Info
 
-export const updateUser = async (req, res) => {
+const updateUser = async (req, res) => {
   try {
     const { username, email, password } = req.body;
     const user = await User.findOne({ email }).select("+password");
@@ -148,7 +148,7 @@ export const updateUser = async (req, res) => {
 }
 //update the avatar
 
-export const updateAvatar = async (req, res) => {
+const updateAvatar = async (req, res) => {
   try {
     const existingUser = await User.findById(req.user.id);
     if (req.body.avatar !== "") {
@@ -175,7 +175,7 @@ export const updateAvatar = async (req, res) => {
 }
 //delete user by admin
 
-export const deleteUser = async (req, res) => {
+const deleteUser = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -195,7 +195,7 @@ export const deleteUser = async (req, res) => {
 
 //update Address
 
-export const updateAddress = async (req, res) => {
+const updateAddress = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -224,7 +224,7 @@ export const updateAddress = async (req, res) => {
 }
 //delete Address
 
-export const deleteAddress = async (req, res) => {
+const deleteAddress = async (req, res) => {
   try {
     const addressId = req.params.id;
     const userId = req.user._id;
@@ -246,7 +246,7 @@ export const deleteAddress = async (req, res) => {
 }
 //update password
 
-export const updatePassword = async (req, res) => {
+const updatePassword = async (req, res) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id).select("+password");
@@ -268,7 +268,7 @@ export const updatePassword = async (req, res) => {
 }
 //activate User
 
-export const activateUser = async (req, res) => {
+const activateUser = async (req, res) => {
   try {
     const { activateToken } = req.body;
     const newUser = verifyToken(activateToken);
@@ -290,4 +290,20 @@ export const activateUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+}
+
+module.exports = {
+  createUser,
+  deleteUser,
+  deleteAddress,
+  updateAddress,
+  updateAvatar,
+  updatePassword,
+  getAllUsers,
+  getUser,
+  getSingleUser,
+  updateUser,
+  loginUser,
+  logoutUser,
+  activateUser
 }

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 
 const messageSchema = new mongoose.Schema({
@@ -16,19 +16,20 @@ const messageSchema = new mongoose.Schema({
   },
   images: [
     {
-     public_id:{
-      type:String,
-      required:true
-     },
-     url:{
-      type:String,
-      required:true
-     }
+      public_id: {
+        type: String,
+        required: true
+      },
+      url: {
+        type: String,
+        required: true
+      }
     }
-]
+  ]
 }, { timestamps: true });
 
 
-export const Message = mongoose.model("Message", messageSchema);
+const Message = mongoose.model("Message", messageSchema);
+module.exports = Message;
 
 

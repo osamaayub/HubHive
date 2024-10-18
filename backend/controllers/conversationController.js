@@ -1,10 +1,10 @@
-import { Conversation } from "../models/conversation.model";
+const { Conversation } = require("../models/conversation.model");
 
 
 
 //create New Conversation
 
-export const createNewConversation = async (req, res) => {
+const createNewConversation = async (req, res) => {
 
   try {
     const { title, userId, memberId } = req.body;
@@ -29,7 +29,7 @@ export const createNewConversation = async (req, res) => {
 }
 //get seller Conversations
 
-export const getSellerConversations = async (req, res) => {
+const getSellerConversations = async (req, res) => {
   try {
     const { id } = req.params;
     const conversation = await Conversation.find({
@@ -46,7 +46,7 @@ export const getSellerConversations = async (req, res) => {
 //get User Conversation
 
 
-export const getUserConversation = async (req, res) => {
+const getUserConversation = async (req, res) => {
   try {
     const { id } = req.params;
     const userConversation = await Conversation.find({
@@ -63,7 +63,7 @@ export const getUserConversation = async (req, res) => {
 }
 //update the conversation
 
-export const updateConversation = async (req, res) => {
+const updateConversation = async (req, res) => {
 
   try {
     const { id } = req.params;
@@ -76,3 +76,4 @@ export const updateConversation = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+module.exports = { getSellerConversations, getUserConversation, updateConversation, createNewConversation }

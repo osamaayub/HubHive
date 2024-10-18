@@ -1,9 +1,9 @@
-import { Order } from "../models/order.model";
-import { Product } from "../models/product.model";
-import { Shop } from "../models/shop.model";
+const { Order } = require("../models/order.model");
+const { Product } = require("../models/product.model");
+const { Shop } = require("../models/shop.model");
 
 //create new order
-export const createNewOrder = async (req, res) => {
+const createNewOrder = async (req, res) => {
   try {
     const { cart, shippingAddress, user, totalPrice, paymentInfo
     } = req.body;
@@ -41,7 +41,7 @@ export const createNewOrder = async (req, res) => {
 }
 //get User orders
 
-export const getOrders = async (req, res) => {
+const getOrders = async (req, res) => {
   try {
     const { id } = req.params;
     const order = await Order.find({
@@ -54,7 +54,7 @@ export const getOrders = async (req, res) => {
   }
 }
 //All Order managed by Admin 
-export const getAllOrders = async (req, res) => {
+const getAllOrders = async (req, res) => {
   try {
     const order = await Order.find().sort({ createdAt: -1, deliveredAt: -1 });
     res.status(200).json(order);
@@ -64,7 +64,7 @@ export const getAllOrders = async (req, res) => {
 }
 //update the order status of the seller
 
-export const updateOrderStatus = async (req, res) => {
+const updateOrderStatus = async (req, res) => {
   try {
     const { id } = req.params;
     const { status } = req.body;
@@ -113,7 +113,7 @@ export const updateOrderStatus = async (req, res) => {
 }
 //update the user refund
 
-export const updateRefundUser = async (req, res) => {
+const updateRefundUser = async (req, res) => {
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
@@ -130,7 +130,7 @@ export const updateRefundUser = async (req, res) => {
 }
 //update the seller refund
 
-export const updateRefundSeller = async (req, res) => {
+const updateRefundSeller = async (req, res) => {
   try {
     const { id } = req.params;
     const order = await Order.findById(id);
@@ -154,4 +154,12 @@ export const updateRefundSeller = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
+}
+module.exports = {
+  createNewOrder,
+  updateOrderStatus,
+  updateRefundSeller,
+  updateRefundUser,
+  getAllOrders,
+  getOrders
 }

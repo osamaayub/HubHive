@@ -1,7 +1,7 @@
-import { Message } from "../models/message.model";
-import { v2 as cloudinary } from "cloudinary";
+const { Message } = require("../models/message.model");
+const cloudinary = require("cloudinary").v2;
 
-export const createNewMessage = async (req, res) => {
+const createNewMessage = async (req, res) => {
   try {
     const messageData = req.body;
     const uploadMessage = await cloudinary.uploader.upload({
@@ -25,7 +25,7 @@ export const createNewMessage = async (req, res) => {
   }
 
 }
-export const getAllMessage = async (req, res) => {
+const getAllMessage = async (req, res) => {
   try {
     const { id } = req.params;
     const message = await Message.find({ conversationId: id });
@@ -34,3 +34,4 @@ export const getAllMessage = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+module.exports = { createNewMessage, getAllMessage }

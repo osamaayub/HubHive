@@ -1,4 +1,4 @@
-import { Product } from "../models/product.model";
+const { Product } = require("../models/product.model");
 import { Shop } from "../models/shop.model";
 import { Order } from "../models/order.model";
 import { v2 as cloudinary } from "cloudinary";
@@ -7,7 +7,7 @@ import { v2 as cloudinary } from "cloudinary";
 
 //create a new product
 
-export const createProduct = async (req, res) => {
+const createProduct = async (req, res) => {
   try {
     const { shopId } = req.body;
     const shop = await Shop.find({ id: shopId });
@@ -45,7 +45,7 @@ export const createProduct = async (req, res) => {
 }
 //get all the products by id
 
-export const getAllProducts = async (req, res) => {
+const getAllProducts = async (req, res) => {
 
   try {
     const { id } = req.params;
@@ -59,7 +59,7 @@ export const getAllProducts = async (req, res) => {
   }
 }
 //get all the shop Items
-export const getProducts = async (req, res) => {
+const getProducts = async (req, res) => {
   try {
     const product = await Product.find();
     res.status(200).json({
@@ -72,7 +72,7 @@ export const getProducts = async (req, res) => {
 }
 //products managed by admin
 
-export const manageProducts = async (req, res) => {
+const manageProducts = async (req, res) => {
   try {
     const product = await Product.find().sort({ CreatedAt: -1 });
     res.status(200).json({
@@ -84,7 +84,7 @@ export const manageProducts = async (req, res) => {
   }
 }
 //update review
-export const updateReview = async (req, res) => {
+const updateReview = async (req, res) => {
   try {
     const { user, rating, comment, productId, orderId } = req.body;
 
@@ -140,7 +140,7 @@ export const updateReview = async (req, res) => {
   }
 };
 //delete review
-export const deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.findById(id);
@@ -161,3 +161,4 @@ export const deleteProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 }
+module.exports = { createProduct, deleteProduct, getAllProducts, manageProducts, updateReview }

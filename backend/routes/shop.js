@@ -1,6 +1,6 @@
 import express from "express";
 
-import { isSeller, isAdmin, isAutenticated } from "../middlewares/auth";
+import { isSeller, isAdmin, isAutenticated } from "../middlewares/auth.js";
 
 export const shopRouter = express.Router();
 

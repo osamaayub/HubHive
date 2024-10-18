@@ -1,9 +1,9 @@
-import express from "express";
-import { isSeller, isAuthenticated } from "../middlewares/auth";
+const express = require("express");
+const { isSeller, isAuthenticated } = require("../middlewares/auth");
 
-import { createNewConversation, getSellerConversations, getUserConversation, updateConversation } from "../controllers/conversationController";
+const { createNewConversation, getSellerConversations, getUserConversation, updateConversation } = require("../controllers/conversationController");
 
-export const conversationRouter = express.Router();
+const conversationRouter = express.Router();
 
 
 
@@ -22,3 +22,5 @@ conversationRouter.get("/get-user-conversation/:id", isAuthenticated, getUserCon
 //update the conversation
 
 conversationRouter.put("/update-conversation/:id", updateConversation);
+
+module.exports = conversationRouter;

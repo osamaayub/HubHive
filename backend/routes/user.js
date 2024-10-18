@@ -1,4 +1,4 @@
-import { isAdmin, isAuthenticated } from "../middlewares/auth";
+import { isAdmin, isAuthenticated } from "../middlewares/auth.js";
 
 import express from "express";
 
@@ -16,7 +16,7 @@ import {
   deleteAddress,
   updateAvatar,
   updatePassword
-} from "../controllers/userController";
+} from "../controllers/userController.js";
 
 export const userRouter = express.Router();
 //create a new user

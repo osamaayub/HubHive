@@ -1,10 +1,10 @@
-import { CoupCode } from "../models/couponCode.model";
+const { CoupCode } = require("../models/couponCode.model");
 
 
 
 
 //create a new CouponCode
-export const createNewCoupon = async (req, res) => {
+const createNewCoupon = async (req, res) => {
   try {
     const coupon = await CoupCode.create({
       name: req.body.name
@@ -19,7 +19,7 @@ export const createNewCoupon = async (req, res) => {
 
 }
 //get coupon code by id
-export const getCouponCode = async (req, res) => {
+const getCouponCode = async (req, res) => {
   try {
     const { id } = req.params;
     const coupon = await CoupCode.find({ shopId: id });
@@ -30,7 +30,7 @@ export const getCouponCode = async (req, res) => {
 }
 //get coupon by name
 
-export const getCouponCodebyName = async (req, res) => {
+const getCouponCodebyName = async (req, res) => {
   try {
     const { name } = req.body;
     const couponCode = await CoupCode.find(name);
@@ -42,7 +42,7 @@ export const getCouponCodebyName = async (req, res) => {
 }
 //delete an coupon code
 
-export const deleteCouponCode = async (req, res) => {
+const deleteCouponCode = async (req, res) => {
   try {
     const { id } = req.params;
     const coupon = await CoupCode.findByIdAndDelete(id);
@@ -55,3 +55,4 @@ export const deleteCouponCode = async (req, res) => {
   }
 
 }
+module.exports = { createNewCoupon, deleteCouponCode, getCouponCode, getCouponCodebyName }

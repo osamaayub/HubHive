@@ -1,5 +1,5 @@
-import mongoose from "mongoose";
-import { hashPassword, createToken, comparePassword } from "../utils";
+const mongoose = require("mongoose");
+const { hashPassword, createToken, comparePassword } = require("../utils");
 
 
 const userSchema = new mongoose.Schema({
@@ -77,4 +77,5 @@ userSchema.methods.comparePassword = async function (enteredPassword) {
 
 }
 
-export const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", userSchema);
+module.exports = User;

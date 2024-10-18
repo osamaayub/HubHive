@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-
+const mongoose = require("mongoose");
 
 const eventSchema = new mongoose.Schema({
   name: {
@@ -54,6 +52,6 @@ const eventSchema = new mongoose.Schema({
   ]
 }, { timestamps: true });
 
-
-
-export const Event = mongoose.model("Event", eventSchema);
+// Change the export statement to CommonJS
+const Event = mongoose.model("Event", eventSchema);
+module.exports = Event;

@@ -1,6 +1,6 @@
-import express from "express";
-import { isSeller, isAdmin, isAuthenticated } from "../middlewares/auth";
-import { createWithdrawRequest, getAllPayments, updateWithdrawRequest } from "../controllers/withdrawController";
+const express = require("express");
+const { isSeller, isAdmin, isAuthenticated } = require("../middlewares/auth");
+const { createWithdrawRequest, getAllPayments, updateWithdrawRequest } = require("../controllers/withdrawController");
 
 const WithdrawRouter = express.Router();
 
@@ -19,3 +19,5 @@ WithdrawRouter.get('/get-all-payments', isAuthenticated, isAdmin("Admin"), getAl
 //update all of the withdraw request
 
 WithdrawRouter.put("/update-withdraw-request/:id", updateWithdrawRequest);
+
+module.exports = WithdrawRouter;

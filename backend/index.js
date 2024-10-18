@@ -1,9 +1,10 @@
-import express from "express";
-import "dotenv/config";
-import cors from "cors";
-import ConnectDB from "./config/database.js";
-import { v2 as cloudinary } from "cloudinary";
-import {
+const express = require("express");
+require("dotenv/config");
+const cors = require("cors");
+const ConnectDB = require("./config/database");
+const cloudinary = require("cloudinary").v2;
+
+const {
   conversationRouter,
   couponCodeRouter,
   eventRouter,
@@ -13,8 +14,9 @@ import {
   userRouter,
   withdrawRouter,
   shopRouter
-} from "./routes";
-import cookieParser from "cookie-parser";
+} = require("./routes");
+
+const cookieParser = requrie("cookie-parser");
 
 
 

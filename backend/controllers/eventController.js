@@ -1,11 +1,11 @@
-import { Event } from "../models/event.model";
-import { v2 as cloudinary } from "cloudinary";
-import { Shop } from "../models/shop.model";
+const { Event } = require("../models/event.model");
+const cloudinary = require("cloudinary").v2;
+const { Shop } = require("../models/shop.model");
 
 
 
 //create a new Event
-export const createNewEvent = async (req, res) => {
+const createNewEvent = async (req, res) => {
   try {
     const { shopId } = req.body;
     const shop = await Shop.find({ id: shopId });
@@ -41,7 +41,7 @@ export const createNewEvent = async (req, res) => {
 }
 //get all Events
 
-export const getAllEvents = async (req, res) => {
+const getAllEvents = async (req, res) => {
   try {
     const event = await Event.find();
     res.status(200).json(event);
@@ -52,7 +52,7 @@ export const getAllEvents = async (req, res) => {
 
 //get event of the shop
 
-export const getEvents = async (req, res) => {
+const getEvents = async (req, res) => {
   try {
     const { id } = req.params;
     const event = await Event.find({ shopId: id });
@@ -66,7 +66,7 @@ export const getEvents = async (req, res) => {
 
 
 
-export const getAdminEvents = async (req, res) => {
+const getAdminEvents = async (req, res) => {
   try {
     const { id } = req.params;
     const event = await Event.find().sort({ createdAt: -1 });
@@ -77,7 +77,7 @@ export const getAdminEvents = async (req, res) => {
   }
 
 }
-export const deleteEvent = async (req, res) => {
+const deleteEvent = async (req, res) => {
   try {
     const { id } = req.params;
     const event = await Event.findById(id);
@@ -98,3 +98,4 @@ export const deleteEvent = async (req, res) => {
     res.status(500).json({ message: error.message })
   }
 }
+module.exports = { createNewEvent, deleteEvent, getAdminEvents, getEvents, getAllEvents }
