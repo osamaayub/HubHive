@@ -1,8 +1,8 @@
-import express from "express";
+const express = require("express");
 
-import { isSeller, isAdmin, isAutenticated } from "../middlewares/auth.js";
+const { isSeller, isAdmin, isAutenticated } = require("../middlewares/auth");
 
-export const shopRouter = express.Router();
+const shopRouter = express.Router();
 
 
 
@@ -44,3 +44,5 @@ shopRouter.delete("/delete-sellers/:id", isAutenticated, isAdmin("Admin"), delet
 shopRouter.put("/update-payment-method/:id", isSeller, updatePaymentMethod);
 //delete withdrawal method by seller
 shopRouter.delete("/delete-payment-method/:id", isSeller, deletePaymentMethod);
+
+module.exports = shopRouter;
