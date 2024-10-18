@@ -1,13 +1,14 @@
-import express from "express";
-import { isAdmin, isSeller, isAuthenticated } from "../middlewares/auth.js";
-import {
+const express = require("express");
+const { isAdmin, isSeller, isAuthenticated } = require("../middlewares/auth");
+const {
   getOrders,
   getAllOrders,
   updateOrderStatus,
   updateRefundUser,
   updateRefundSeller
-} from "../controllers/orderController.js";
-export const orderRouter = express.Router();
+} = require("../controllers/orderController");
+
+const orderRouter = express.Router();
 
 
 //get  User orders
@@ -30,3 +31,5 @@ orderRouter.put("/user/order-refund/:id", updateRefundUser);
 orderRouter.put("/seller/order-refund/:id", updateRefundSeller);
 //update order status for seller
 orderRouter.put("/seller/order-status/:id", isSeller, updateOrderStatus);
+
+module.exports = orderRouter;

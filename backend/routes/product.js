@@ -1,9 +1,9 @@
-import express from "express";
-import { isAdmin, isSeller, isAuthenticated } from "../middlewares/auth.js";
-import { createProduct, getAllProducts, getProducts, updateReview, deleteProduct, manageProducts } from "../controllers/productController.js";
+const express = require("express");
+const { isAdmin, isSeller, isAuthenticated } = require("../middlewares/auth");
+const { createProduct, getAllProducts, getProducts, updateReview, deleteProduct, manageProducts } = require("../controllers/productController");
 
 
-export const productRouter = express.Router();
+const productRouter = express.Router();
 
 
 //create a new product
@@ -32,3 +32,4 @@ productRouter.put("/create-new-review", isAuthenticated, updateReview);
 
 productRouter.get("/admin-all-products", isAuthenticated, isAdmin("Admin"), manageProducts);
 
+module.exports = productRouter;
