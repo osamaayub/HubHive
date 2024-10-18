@@ -25,8 +25,7 @@ const productSchema = new mongoose.Schema({
   discountedPrice: {
     type: Number,
     required: true
-  },
-  stock: {
+  }, stock: {
     type: Number,
     required: true
   },
@@ -78,4 +77,5 @@ const productSchema = new mongoose.Schema({
 
 
 export const Product = mongoose.model("Product", productSchema);
+
 
