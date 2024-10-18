@@ -1,8 +1,8 @@
-import express from "express";
-import { isSeller } from "../middlewares/auth.js";
-import { createNewCoupon, getCouponCode, deleteCouponCode, getCouponCodebyName } from "../controllers/couponController.js";
+const express = require("express");
+const { isSeller } = require("../middlewares/auth");
+const { createNewCoupon, getCouponCode, deleteCouponCode, getCouponCodebyName } = require("../controllers/couponController");
 
-export const couponCodeRouter = express.Router();
+const couponCodeRouter = express.Router();
 
 //create a new coupon
 
@@ -20,3 +20,5 @@ couponCodeRouter.delete("/delete-coupon-code/:id", isSeller, deleteCouponCode);
 //get coupon code by name
 
 couponCodeRouter.get("/get-coupon-code/:name", isSeller, getCouponCodebyName);
+
+module.exports = couponCodeRouter;

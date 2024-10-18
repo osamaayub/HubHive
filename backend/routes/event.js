@@ -1,6 +1,6 @@
-import express from "express";
-import { isAdmin, isAuthenticated } from "../middlewares/auth.js";
-import { getAllEvents, getEvents, getAdminEvents, createNewEvent, deleteEvent } from "../controllers/eventController.js";
+const express = require("express");
+const { isAdmin, isAuthenticated } = require("../middlewares/auth");
+const { getAllEvents, getEvents, getAdminEvents, createNewEvent, deleteEvent } = require("../controllers/eventController");
 
 export const eventRouter = express.Router();
 
@@ -25,3 +25,5 @@ eventRouter.delete("/delete-event/:id", deleteEvent);
 //events managed by admin
 
 eventRouter.get("/admin-all-events", isAuthenticated, isAdmin("Admin"), getAdminEvents)
+
+module.exports = eventRouter;
