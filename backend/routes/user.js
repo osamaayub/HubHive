@@ -1,8 +1,8 @@
-import { isAdmin, isAuthenticated } from "../middlewares/auth.js";
+const { isAdmin, isAuthenticated } = require("../middlewares/auth");
 
-import express from "express";
+const express = require("express");
 
-import {
+const {
   createUser,
   loginUser,
   logoutUser,
@@ -16,9 +16,9 @@ import {
   deleteAddress,
   updateAvatar,
   updatePassword
-} from "../controllers/userController.js";
+} = require("../controllers/userController");
 
-export const userRouter = express.Router();
+const userRouter = express.Router();
 //create a new user
 
 userRouter.post("/new-user", createUser);
@@ -68,3 +68,5 @@ userRouter.put("/update-password", isAuthenticated, updatePassword);
 //update  user avatar
 
 userRouter.put("/update-avatar", isAuthenticated, updateAvatar);
+
+module.exports = userRouter;
