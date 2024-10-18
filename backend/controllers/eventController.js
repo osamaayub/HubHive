@@ -90,7 +90,8 @@ export const deleteEvent = async (req, res) => {
       );
     }
     await Event.findByIdAndDelete(id);
-    res.status(200).json(event, {
+    res.status(200).json({
+      event,
       message: `${event} is deleted sucessfully`
     });
   } catch (error) {

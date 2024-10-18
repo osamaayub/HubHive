@@ -50,8 +50,9 @@ export const getAllProducts = async (req, res) => {
   try {
     const { id } = req.params;
     const product = await Product.find({ shopId: id });
-    res.status(200).json(product, {
-      sucess: true
+    res.status(200).json({
+      sucess: true,
+      product
     })
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -61,8 +62,9 @@ export const getAllProducts = async (req, res) => {
 export const getProducts = async (req, res) => {
   try {
     const product = await Product.find();
-    res.status(200).json(product, {
-      sucess: true
+    res.status(200).json({
+      sucess: true,
+      product
     })
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -73,8 +75,9 @@ export const getProducts = async (req, res) => {
 export const manageProducts = async (req, res) => {
   try {
     const product = await Product.find().sort({ CreatedAt: -1 });
-    res.status(200).json(product, {
-      sucess: true
+    res.status(200).json({
+      sucess: true,
+      product
     })
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -150,8 +153,9 @@ export const deleteProduct = async (req, res) => {
       );
     }
     await Product.findByIdAndDelete(id);
-    res.status(200).json(product, {
-      message: `${product} is deleted sucessfully`
+    res.status(200).json({
+      product,
+      message: `${product} is deleted sucessfully`,
     });
   } catch (error) {
     res.status(500).json({ message: error.message });

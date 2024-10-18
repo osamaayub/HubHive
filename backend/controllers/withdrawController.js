@@ -52,6 +52,24 @@ export const updateWithdrawRequest = async (req, res) => {
     const withdraw = await Withdraw.findByIdAndUpdate({ new: true, id }, {
       status: "sucess"
     });
+    const seller = await Shop.findById(sellerId);
+    const transaction = {
+      _id: withdraw._id,
+      amount: withdraw.amount,
+      updatedAt: withdraw.updatedAt,
+      status: withdraw.status
+    }
+    seller.transactions = [...seller.transactions, transaction];
+    await seller.save();
+    await sendEmail({
+      email: seller.email,
+      subject: "Payment Confirmation",
+      message: `Hello ${seller.name},your withdraw Amount is ${seller.amount}$ is on the way.Delivery time depends on your bank rules which is usually 3 to 7 days`
+    });
+    res.status(200).json({
+      sucess: true,
+      withdraw
+    })
   } catch (error) {
     res.status(500).json({ message: error.mesage });
   }

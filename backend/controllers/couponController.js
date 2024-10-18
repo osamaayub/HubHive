@@ -46,7 +46,8 @@ export const deleteCouponCode = async (req, res) => {
   try {
     const { id } = req.params;
     const coupon = await CoupCode.findByIdAndDelete(id);
-    res.status(200).json(coupon, {
+    res.status(200).json({
+      coupon,
       message: `${coupon} deleted sucessfully`
     })
   } catch (error) {

@@ -35,8 +35,9 @@ export const getSellerConversations = async (req, res) => {
     const conversation = await Conversation.find({
       $in: members[id]
     }).sort({ updatedAt: -1, createdAt: -1 });
-    res.status(200).json(conversation, {
-      sucess: true
+    res.status(200).json({
+      sucess: true,
+      conversation
     })
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -51,8 +52,9 @@ export const getUserConversation = async (req, res) => {
     const userConversation = await Conversation.find({
       $in: members[id]
     }).sort({ updatedAt: -1, createdAt: -1 });
-    res.status(200).json(userConversation, {
-      sucess: true
+    res.status(200).json({
+      sucess: true,
+      userConversation
     })
 
   } catch (error) {
