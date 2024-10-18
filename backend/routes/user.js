@@ -1,53 +1,70 @@
-import {isAdmin,isAuthenticated}from "../middlewares/auth";
+import { isAdmin, isAuthenticated } from "../middlewares/auth";
 
 import express from "express";
 
-export const userRouter = express.Router(); 
+import {
+  createUser,
+  loginUser,
+  logoutUser,
+  activateUser,
+  updateUser,
+  deleteUser,
+  getSingleUser,
+  getUser,
+  getAllUsers,
+  updateAddress,
+  deleteAddress,
+  updateAvatar,
+  updatePassword
+} from "../controllers/userController";
 
-
-
+export const userRouter = express.Router();
 //create a new user
 
-userRouter.post("/new-user",createUser);
+userRouter.post("/new-user", createUser);
 
 //login user
 
-userRouter.post("/login",loginUser);
+userRouter.post("/login", loginUser);
 
 //Register user
-userRouter.post("/register", registerUser);
+userRouter.post("/activation", activateUser);
 
 //logout user
 userRouter.get("/logout", logoutUser);
 
-//update user 
+//update user Info
 
-userRouter.put("/update-user", isAuthenticated,updateUser);
+userRouter.put("/update-user", isAuthenticated, updateUser);
 
 //load User
 
-userRouter.get("/get-user", isAuthenticated,getUser);
+userRouter.get("/getuser", isAuthenticated, getUser);
 
 //all Users For Admin
 
-userRouter.get("/admin-all-users", isAuthenticated,isAdmin("Admin"),getAllUsers);
+userRouter.get("/Admin/users", isAuthenticated, isAdmin("Admin"), getAllUsers);
 
 //get single User
 
-userRouter.get("/user-details/:id",getSingleUser);
+userRouter.get("/user-details/:id", getSingleUser);
 
-//delete user 
-userRouter.delete("/delete-user/:id",deleteUser);
+//delete user by Admin
+userRouter.delete("/delete-user/:id", isAuthenticated, isAdmin("Admin"), deleteUser);
 
 
-//adress routes
+//update user address
 
-userRouter.put("/address/:id",updateAddress);
+userRouter.put("/address/:id", isAuthenticated, updateAddress);
 
-//delete address
+//delete  user address
 
-userRouter.delete("/delete-address/:id",deleteAddress);
+userRouter.delete("/delete-address/:id", isAuthenticated, deleteAddress);
 
-//update password
+//update user password
 
-userRouter.put("/update-password",updatePassword);
+userRouter.put("/update-password", isAuthenticated, updatePassword);
+
+//update  user avatar
+
+userRouter.put("/update-avatar", isAuthenticated, updateAvatar);
