@@ -1,13 +1,12 @@
-import { Withdraw } from "../models/withdraw.model";
-import { sendEmail } from "../utils/sendEmail";
-import { Shop } from "../models/shop.model";
+const { Withdraw } = require("../models/withdraw.model");
+const { sendEmail } = require("../utils/sendEmail");
+const { Shop } = require("../models/shop.model");
 
 
 //create new withdraw Request
 
 
-
-export const createWithdrawRequest = async (req, res) => {
+const createWithdrawRequest = async (req, res) => {
   try {
     const { amount } = req.body;
     const data = {
@@ -35,7 +34,7 @@ export const createWithdrawRequest = async (req, res) => {
 }
 //get all payment admin
 
-export const getAllPayments = async (req, res) => {
+const getAllPayments = async (req, res) => {
   try {
     const amount = await Withdraw.find().sort({ createdAt: -1 });
     res.status(200).json(amount);
@@ -45,7 +44,7 @@ export const getAllPayments = async (req, res) => {
 }
 //update withdraw request 
 
-export const updateWithdrawRequest = async (req, res) => {
+const updateWithdrawRequest = async (req, res) => {
   try {
     const { sellerId } = req.body;
     const { id } = req.params;
@@ -73,4 +72,9 @@ export const updateWithdrawRequest = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.mesage });
   }
+}
+module.exports = {
+  getAllPayments,
+  updateWithdrawRequest,
+  createWithdrawRequest
 }
