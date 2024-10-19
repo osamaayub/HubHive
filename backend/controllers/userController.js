@@ -277,7 +277,7 @@ const activateUser = async (req, res) => {
     const { activateToken } = req.body;
     const newUser = verifyToken(activateToken);
     if (!newUser) return res.status(400).json({ message: "Invalid Token" });
-    const { username, email, password, avatar } = req.body;
+    const { username, email, password, avatar } = newUser;
     let user = await User.findOne({ email });
     if (user) return res.status(400).json({ message: "user already exists" });
     user = await user.create({
