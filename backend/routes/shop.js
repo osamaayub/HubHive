@@ -1,7 +1,22 @@
 const express = require("express");
 
-const { isSeller, isAdmin, isAutenticated } = require("../middlewares/auth");
+const { isSeller, isAdmin, isAuthenticated } = require("../middlewares/auth");
 
+const {
+  createNewShop,
+  activateUser,
+  loginShop,
+  getSellers,
+  logoutShop,
+  getShopInfo,
+  updatePaymentMethod,
+  updateShopAvatar,
+  deletePaymentMethod,
+  deleteSellerData,
+  getSellersData,
+  updateSellerData
+
+} = require("../controllers/shopController");
 const shopRouter = express.Router();
 
 
@@ -33,13 +48,18 @@ shopRouter.put("/update-shop-avatar/:id", isSeller, updateShopAvatar);
 
 // admin will managed all the sellers 
 
-shopRouter.get("/admin-all-sellers", isAutenticated, isAdmin("Admin"), getAllSellersData);
+shopRouter.get("/admin/sellers", isAuthenticated, isAdmin("Admin"), getSellersData);
 
 //delete all sellers managed by admin
-shopRouter.delete("/delete-sellers/:id", isAutenticated, isAdmin("Admin"), deleteSellerData);
+shopRouter.delete("/delete-sellers/:id", isAuthenticated, isAdmin("Admin"), deleteSellerData);
 
 
+//activate User 
+shopRouter.post("/activation", activateUser);
 //update withdrawal method by seller
+
+//update seller data 
+shopRouter.put("/update-seller-info", isSeller, updateSellerData);
 
 shopRouter.put("/update-payment-method/:id", isSeller, updatePaymentMethod);
 //delete withdrawal method by seller
