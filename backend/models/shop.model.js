@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { hashPassword, createToken, comparePassword } = require("../utils");
 
 
 const shopSchema = new mongoose.Schema({
@@ -64,10 +65,27 @@ const shopSchema = new mongoose.Schema({
         default: "Processing"
       }
     }
-  ]
+  ],
+  resetPasswordToken: string,
+  resetPasswordTime: Date,
 }, { timestamps: true });
 
+shopSchema.pre("save", async (next) => {
 
+  if (!this.isModified("password")) {
+    next();
+  }
+  this.password = await hashPassword(this.password);
 
+});
+
+userSchema.methods.createToken = function () {
+  return createToken({ id: this._id });
+}
+//compare password with hash password in the document
+shopSchema.methods.comparePassword = async function (enteredPassword) {
+  return comparePassword(enteredPassword, this.password);
+
+}
 const Shop = mongoose.model("Shop", shopSchema);
 module.exports = Shop;
