@@ -5,7 +5,8 @@ const {
   getAllOrders,
   updateOrderStatus,
   updateRefundUser,
-  updateRefundSeller
+  updateRefundSeller,
+  createNewOrder
 } = require("../controllers/orderController");
 
 const orderRouter = express.Router();
