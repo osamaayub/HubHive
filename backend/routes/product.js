@@ -21,7 +21,7 @@ productRouter.delete("/delete-shop-item/:id", isSeller, deleteProduct);
 
 //get all the shop Items
 
-productRouter.get("/get-all-products", getProducts)
+productRouter.get("/get-all-products", getProducts);
 
 //update a review about a product
 
