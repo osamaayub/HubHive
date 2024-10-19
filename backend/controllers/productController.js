@@ -1,7 +1,7 @@
 const { Product } = require("../models/product.model");
-import { Shop } from "../models/shop.model";
-import { Order } from "../models/order.model";
-import { v2 as cloudinary } from "cloudinary";
+const { Shop } = require("../models/shop.model");
+const { Order } = require("../models/order.model");
+const cloudinary = require("cloudinary").v2;
 
 
 
