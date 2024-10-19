@@ -34,7 +34,10 @@ cloudinary.config({
 app.use(express.json());
 app.use(cookieParser());
 
-app.use(cors());
+app.use(cors({
+  origin: "http://localhost:5173",
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
 
 
 app.use("/api/v2/conversation", conversationRouter);
