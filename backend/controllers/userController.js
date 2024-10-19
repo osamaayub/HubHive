@@ -24,7 +24,7 @@ const createUser = async (req, res) => {
         url: uploadUserImage.secure_url
       }
     }
-    const activationToken = createToken(user);
+    const activationToken = createActivationToken(user);
     const activationUrl = `http://localhost:5000/${activationToken}`
     await sendEmail({
       email: user.email,
@@ -38,8 +38,12 @@ const createUser = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
-
 }
+//activating the user
+const createActivationToken = (user) => {
+  return createToken(user);
+}
+
 
 //login User 
 
