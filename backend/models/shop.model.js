@@ -66,7 +66,7 @@ const shopSchema = new mongoose.Schema({
       }
     }
   ],
-  resetPasswordToken: string,
+  resetPasswordToken: String,
   resetPasswordTime: Date,
 }, { timestamps: true });
 
@@ -79,7 +79,7 @@ shopSchema.pre("save", async (next) => {
 
 });
 
-userSchema.methods.createToken = function () {
+shopSchema.methods.createToken = function () {
   return createToken({ id: this._id });
 }
 //compare password with hash password in the document
