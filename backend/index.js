@@ -16,7 +16,7 @@ const {
   shopRouter
 } = require("./routes");
 
-const cookieParser = requrie("cookie-parser");
+const cookieParser = require("cookie-parser");
 
 
 
