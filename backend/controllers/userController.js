@@ -1,4 +1,4 @@
-const { User } = requuire("../models/user.model");
+const { User } = require("../models/user.model");
 const cloudinary = require("cloudinary").v2;
 const sendEmail = require("../utils/sendEmail");
 const { createToken, comparePassword, verifyToken } = require("../utils");
