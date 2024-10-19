@@ -58,7 +58,10 @@ const loginUser = async (req, res) => {
     const isPassword = await comparePassword(password, user.password);
     if (!isPassword) return res.status(400).json({ message: "password is not valid" });
     const token = createToken({ id: user._id, email: user.email });
-    res.status(200).json({ token });
+    res.status(200).json({
+      token,
+      data: user
+    });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
