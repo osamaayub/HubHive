@@ -56,7 +56,7 @@ const userSchema = new mongoose.Schema({
     }
   },
   resetPasswordToken: String,
-  resetPasswordTime: String
+  resetPasswordTime: Date
 
 }, { timestamps: true });
 userSchema.pre("save", async (next) => {
