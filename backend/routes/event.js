@@ -2,7 +2,7 @@ const express = require("express");
 const { isAdmin, isAuthenticated } = require("../middlewares/auth");
 const { getAllEvents, getEvents, getAdminEvents, createNewEvent, deleteEvent } = require("../controllers/eventController");
 
-export const eventRouter = express.Router();
+const eventRouter = express.Router();
 
 
 //create a new event
