@@ -257,7 +257,7 @@ const deletePaymentMethod = async (req, res) => {
     await Shop.save();
     res.status(200).json({
       sucess: true,
-      message: `${seller.withDrawalMethod} has been deleted sucessfully`
+      seller
     })
       ;
   } catch (error) {
